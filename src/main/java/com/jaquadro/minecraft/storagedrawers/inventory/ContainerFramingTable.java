@@ -11,6 +11,7 @@ import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -33,26 +34,34 @@ public class ContainerFramingTable extends Container
     private static final int OutputX = 133;
     private static final int OutputY = 35;
 
-    private IInventory tableInventory;
-    private IInventory craftResult = new InventoryCraftResult();
+    public static final int inputSlotIndex = 0;
+    public static final int matSideSlotIndex = 1;
+    public static final int matTrimSlotIndex = 2;
+    public static final int matFrontSlotIndex = 3;
+    public static final int outputSlotIndex = 4;
 
-    private Slot inputSlot;
-    private Slot materialSideSlot;
-    private Slot materialTrimSlot;
-    private Slot materialFrontSlot;
-    private Slot outputSlot;
-    private List<Slot> playerSlots;
-    private List<Slot> hotbarSlots;
+    protected final IInventory tableInventory;
+    private final IInventory craftResult = new InventoryCraftResult();
+
+    private final Slot inputSlot;
+    private final Slot materialSideSlot;
+    private final Slot materialTrimSlot;
+    private final Slot materialFrontSlot;
+    private final Slot outputSlot;
+    private final List<Slot> playerSlots;
+    private final List<Slot> hotbarSlots;
 
     public ContainerFramingTable (InventoryPlayer inventory, TileEntityFramingTable tileEntity) {
         tableInventory = new InventoryContainerProxy(tileEntity, this);
 
-        inputSlot = addSlotToContainer(new SlotRestricted(tableInventory, 0, InputX, InputY));
+        inputSlot = addSlotToContainer(new SlotRestricted(tableInventory, inputSlotIndex, InputX, InputY));
 
-        materialSideSlot = addSlotToContainer(new SlotRestricted(tableInventory, 1, MaterialSideX, MaterialSideY));
-        materialTrimSlot = addSlotToContainer(new SlotRestricted(tableInventory, 2, MaterialTrimX, MaterialTrimY));
-        materialFrontSlot = addSlotToContainer(new SlotRestricted(tableInventory, 3, MaterialFrontX, MaterialFrontY));
-        outputSlot = addSlotToContainer(new FramingSlotResult(inventory.player, tableInventory, craftResult, new int[] { 0, 1, 2, 3 }, 0, 4, OutputX, OutputY));
+        materialSideSlot = addSlotToContainer(new SlotRestricted(tableInventory, matSideSlotIndex, MaterialSideX, MaterialSideY));
+        materialTrimSlot = addSlotToContainer(new SlotRestricted(tableInventory, matTrimSlotIndex, MaterialTrimX, MaterialTrimY));
+        materialFrontSlot = addSlotToContainer(new SlotRestricted(tableInventory, matFrontSlotIndex, MaterialFrontX, MaterialFrontY));
+
+        outputSlot = addSlotToContainer(new FramingSlotResult(inventory.player, tableInventory, craftResult,
+                new int[] { inputSlotIndex, matSideSlotIndex, matTrimSlotIndex, matFrontSlotIndex }, inputSlotIndex, outputSlotIndex, OutputX, OutputY));
 
         playerSlots = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -68,16 +77,16 @@ public class ContainerFramingTable extends Container
     }
 
     @Override
-    public boolean canInteractWith (EntityPlayer player) {
+    public boolean canInteractWith (@NotNull EntityPlayer player) {
         return tableInventory.isUsableByPlayer(player);
     }
 
     @Override
-    public void onCraftMatrixChanged (IInventory inventory) {
-        ItemStack input = tableInventory.getStackInSlot(inputSlot.getSlotIndex());
-        ItemStack matSide = tableInventory.getStackInSlot(materialSideSlot.getSlotIndex());
-        ItemStack matTrim = tableInventory.getStackInSlot(materialTrimSlot.getSlotIndex());
-        ItemStack matFront = tableInventory.getStackInSlot(materialFrontSlot.getSlotIndex());
+    public void onCraftMatrixChanged (@NotNull IInventory inventory) {
+        ItemStack input = tableInventory.getStackInSlot(inputSlotIndex);
+        ItemStack matSide = tableInventory.getStackInSlot(matSideSlotIndex);
+        ItemStack matTrim = tableInventory.getStackInSlot(matTrimSlotIndex);
+        ItemStack matFront = tableInventory.getStackInSlot(matFrontSlotIndex);
 
         if (!input.isEmpty() && input.getItem() instanceof IFrameable frameable && !matSide.isEmpty()) {
             craftResult.setInventorySlotContents(0, frameable
@@ -90,7 +99,7 @@ public class ContainerFramingTable extends Container
 
     @Override
     @Nonnull
-    public ItemStack transferStackInSlot (EntityPlayer player, int slotIndex) {
+    public ItemStack transferStackInSlot (@NotNull EntityPlayer player, int slotIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = inventorySlots.get(slotIndex);
 

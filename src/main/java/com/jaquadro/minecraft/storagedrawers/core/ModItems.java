@@ -77,6 +77,8 @@ public class ModItems
                 itemRegistry.register(new ItemQuantifyKey("quantify_key", makeName("quantifyKey")));
             if (StorageDrawers.config.cache.enableTape)
                 itemRegistry.register(new ItemTape("tape", makeName("tape")));
+
+            itemRegistry.register(new ItemPortableFramingTable("portable_framing_table", makeName("portableFramingTable")));
         }
 
         @SubscribeEvent

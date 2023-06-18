@@ -50,6 +50,8 @@ item.storagedrawers.personalKey.name=Personal Key
 item.storagedrawers.personalKey.description=Protect access from other players
 item.storagedrawers.tape.name=Packing Tape
 item.storagedrawers.tape.description=Seals drawers for moving
+item.storagedrawers.portableFramingTable.name=Portable Framing Table
+item.storagedrawers.portableFramingTable.description=A Framing Table you can use on the fly!
 
 # Blocks
 tile.storagedrawers.basicDrawers.fulldrawers1.name=Basic Drawer

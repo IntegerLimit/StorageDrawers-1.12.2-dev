@@ -2,6 +2,7 @@ package com.jaquadro.minecraft.storagedrawers.block.tile;
 
 import com.jaquadro.minecraft.storagedrawers.api.storage.attribute.IFrameable;
 import com.jaquadro.minecraft.storagedrawers.block.BlockFramingTable;
+import com.jaquadro.minecraft.storagedrawers.inventory.ContainerFramingTable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,8 +27,7 @@ public class TileEntityFramingTable extends TileEntity implements IInventory
     private String customName;
 
     public TileEntityFramingTable () {
-        for (int i = 0; i < tableItemStacks.length; i++)
-            tableItemStacks[i] = ItemStack.EMPTY;
+        Arrays.fill(tableItemStacks, ItemStack.EMPTY);
     }
 
     @Override
@@ -141,11 +141,11 @@ public class TileEntityFramingTable extends TileEntity implements IInventory
 
     @Override
     public boolean isItemValidForSlot (int slot, @Nonnull ItemStack stack) {
-        if (slot == 0)
+        if (slot == ContainerFramingTable.inputSlotIndex)
             return isItemValidDrawer(stack);
-        if (slot == 4)
+        if (slot == ContainerFramingTable.outputSlotIndex)
             return false;
-        if (slot >= 1 && slot < 4)
+        if (slot >= ContainerFramingTable.matSideSlotIndex && slot <= ContainerFramingTable.matFrontSlotIndex)
             return isItemValidMaterial(stack);
 
         return false;
