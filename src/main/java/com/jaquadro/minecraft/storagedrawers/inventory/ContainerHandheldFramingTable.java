@@ -6,11 +6,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public class ContainerPortableFramingTable extends ContainerFramingTable {
+public class ContainerHandheldFramingTable extends ContainerFramingTable {
     private final World world;
     private static TileEntityFramingTable tileFramingTable = null;
 
-    public ContainerPortableFramingTable (InventoryPlayer inventory, World world) {
+    public ContainerHandheldFramingTable(InventoryPlayer inventory, World world) {
         // TE is only used for slot registration and name purposes, simply give a new one
         super(inventory, getTEFramingTable());
         this.world = world;

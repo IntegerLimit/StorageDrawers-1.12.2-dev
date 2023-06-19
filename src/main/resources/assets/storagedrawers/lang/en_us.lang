@@ -50,8 +50,8 @@ item.storagedrawers.personalKey.name=Personal Key
 item.storagedrawers.personalKey.description=Protect access from other players
 item.storagedrawers.tape.name=Packing Tape
 item.storagedrawers.tape.description=Seals drawers for moving
-item.storagedrawers.portableFramingTable.name=Portable Framing Table
-item.storagedrawers.portableFramingTable.description=A Framing Table you can use on the fly!
+item.storagedrawers.handheldFramingTable.name=Handheld Framing Table
+item.storagedrawers.handheldFramingTable.description=A Framing Table you can use on the fly, by simply right clicking!
 
 # Blocks
 tile.storagedrawers.basicDrawers.fulldrawers1.name=Basic Drawer
@@ -95,6 +95,9 @@ storagedrawers.drawers.sealed=Contents sealed within
 storagedrawers.upgrade.description=Increases storage to %d times base value
 storagedrawers.controller.description=Interact with a bank of connected drawers
 storagedrawers.controllerSlave.description=Extra attach points for controllers
+
+# GUI
+storagedrawers.gui.handheldFramingTable.title=Handheld Framing Table
 
 # Material
 storagedrawers.material=Material: %s
@@ -144,8 +147,10 @@ storagedrawers.config.framedBlocks.enableFramedDrawers=Enable Framed Drawers
 storagedrawers.config.framedBlocks.enableFramedDrawers.tooltip=Drawers with custom materials.
 storagedrawers.config.framedBlocks.enableFramedTrims=Enable Framed Trims
 storagedrawers.config.framedBlocks.enableFramedTrims.tooltip=Trims with custom materials.
-storagedrawers.config.framedBlocks.enableFramingTable=Enable Framing Table
+storagedrawers.config.framedBlocks.enableFramingTable=Enable Framing Tables
 storagedrawers.config.framedBlocks.enableFramingTable.tooltip=A block used to set the materials of the Framed Drawer and Framed Trim, as well as other addon blocks.
+storagedrawers.config.framedBlocks.enableHandheldFramingTable=Enable Handheld Framing Tables
+storagedrawers.config.framedBlocks.enableHandheldFramingTable.tooltip=A handheld version of the Framing Table. You can simply right click and use, no placing required!
 storagedrawers.config.framedBlocks.consumeDecorationItems=Consume Decoration Items
 storagedrawers.config.framedBlocks.consumeDecorationItems.tooltip=Changes whether items used for decoration in the Framing Table gets consumed. Leave true to consume items (default behaviour).
 

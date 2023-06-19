@@ -41,6 +41,8 @@ public class ModItems
     public static ItemQuantifyKey quantifyKey;
     @ObjectHolder(StorageDrawers.MOD_ID + ":tape")
     public static ItemTape tape;
+    @ObjectHolder(StorageDrawers.MOD_ID + ":handheld_framing_table")
+    public static ItemHandheldFramingTable handheldFramingTable;
 
     @Mod.EventBusSubscriber(modid = StorageDrawers.MOD_ID)
     public static class Registration
@@ -77,8 +79,8 @@ public class ModItems
                 itemRegistry.register(new ItemQuantifyKey("quantify_key", makeName("quantifyKey")));
             if (StorageDrawers.config.cache.enableTape)
                 itemRegistry.register(new ItemTape("tape", makeName("tape")));
-
-            itemRegistry.register(new ItemPortableFramingTable("portable_framing_table", makeName("portableFramingTable")));
+            if (StorageDrawers.config.cache.enableHandheldFramingTable)
+                itemRegistry.register(new ItemHandheldFramingTable("handheld_framing_table", makeName("handheldFramingTable")));
         }
 
         @SubscribeEvent
@@ -98,6 +100,7 @@ public class ModItems
             modelRegistry.registerItemVariants(upgradeStatus);
             modelRegistry.registerItemVariants(upgradeCreative);
             modelRegistry.registerItemVariants(upgradeRedstone);
+            modelRegistry.registerItemVariants(handheldFramingTable);
         }
     }
 

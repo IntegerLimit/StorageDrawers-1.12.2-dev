@@ -78,6 +78,7 @@ public class ConfigManager
         public boolean enableFramedDrawers;
         public boolean enableFramedTrims;
         public boolean enableFramingTable;
+        public boolean enableHandheldFramingTable;
         public boolean consumeDecorationItems;
         public boolean invertShift;
         public boolean invertClick;
@@ -239,9 +240,8 @@ public class ConfigManager
         cache.enableFramedDrawers = config.get(sectionFramedBlocks.getQualifiedName(), "enableFramedDrawers", true).setLanguageKey(LANG_PREFIX + "framedBlocks.enableFramedDrawers").setRequiresMcRestart(true).getBoolean();
         cache.enableFramedTrims = config.get(sectionFramedBlocks.getQualifiedName(), "enableFramedTrims", true).setLanguageKey(LANG_PREFIX + "framedBlocks.enableFramedTrims").setRequiresMcRestart(true).getBoolean();
         cache.enableFramingTable = config.get(sectionFramedBlocks.getQualifiedName(), "enableFramingTable", true).setLanguageKey(LANG_PREFIX + "framedBlocks.enableFramingTable").setRequiresMcRestart(true).getBoolean();
-        cache.consumeDecorationItems = config.get(sectionFramedBlocks.getQualifiedName(), "consumeDecorationItems", true,
-                "Changes whether items used for decoration in the Framing Table gets consumed. Leave true to consume items (default behaviour).")
-                .setLanguageKey(LANG_PREFIX + "framedBlocks.consumeDecorationItems").getBoolean();
+        cache.enableHandheldFramingTable = config.get(sectionFramedBlocks.getQualifiedName(), "enableHandheldFramingTable", true).setLanguageKey(LANG_PREFIX + "framedBlocks.enableHandheldFramingTable").setRequiresMcRestart(true).getBoolean();
+        cache.consumeDecorationItems = config.get(sectionFramedBlocks.getQualifiedName(), "consumeDecorationItems", true).setLanguageKey(LANG_PREFIX + "framedBlocks.consumeDecorationItems").setRequiresMcRestart(false).getBoolean();
 
         cache.level2Mult = config.get(sectionUpgrades.getQualifiedName(), "level2Mult", 2).setLanguageKey(LANG_PREFIX + "upgrades.level2Mult").setRequiresWorldRestart(true).getInt();
         cache.level3Mult = config.get(sectionUpgrades.getQualifiedName(), "level3Mult", 4).setLanguageKey(LANG_PREFIX + "upgrades.level3Mult").setRequiresWorldRestart(true).getInt();

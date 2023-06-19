@@ -20,8 +20,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemPortableFramingTable extends Item {
-    public ItemPortableFramingTable (String registryName, String unlocalizedName) {
+public class ItemHandheldFramingTable extends Item {
+    public ItemHandheldFramingTable(String registryName, String unlocalizedName) {
         setRegistryName(registryName);
         setTranslationKey(unlocalizedName);
         setCreativeTab(ModCreativeTabs.tabStorageDrawers);
