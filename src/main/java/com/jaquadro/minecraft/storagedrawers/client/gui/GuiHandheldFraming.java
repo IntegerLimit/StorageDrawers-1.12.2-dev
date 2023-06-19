@@ -6,8 +6,18 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiHandheldFraming extends GuiFraming {
+    private static TileEntityFramingTable tileFramingTable;
     public GuiHandheldFraming(InventoryPlayer inventory) {
-        super(inventory, new TileEntityFramingTable());
+        // TE is only used for name, which we already override, just give new one
+        super(inventory, getTEFramingTable());
+    }
+
+    // This method prevents a new TE being created each time the menu is opened.
+    private static TileEntityFramingTable getTEFramingTable() {
+        if (tileFramingTable == null) {
+            tileFramingTable = new TileEntityFramingTable();
+        }
+        return tileFramingTable;
     }
 
     @Override

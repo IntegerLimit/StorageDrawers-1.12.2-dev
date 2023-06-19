@@ -11,7 +11,7 @@ public class ContainerHandheldFramingTable extends ContainerFramingTable {
     private static TileEntityFramingTable tileFramingTable = null;
 
     public ContainerHandheldFramingTable(InventoryPlayer inventory, World world) {
-        // TE is only used for slot registration and name purposes, simply give a new one
+        // TE is only used for slot registration, simply give a new one
         super(inventory, getTEFramingTable());
         this.world = world;
     }
