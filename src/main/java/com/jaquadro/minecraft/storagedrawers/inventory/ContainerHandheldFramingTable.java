@@ -10,9 +10,10 @@ public class ContainerHandheldFramingTable extends ContainerFramingTable {
     private final World world;
     private static TileEntityFramingTable tileFramingTable = null;
 
+    // TODO Test if inputing player inv saves data
     public ContainerHandheldFramingTable(InventoryPlayer inventory, World world) {
         // TE is only used for slot registration, simply give a new one
-        super(inventory, getTEFramingTable());
+        super(inventory, inventory);
         this.world = world;
     }
 
@@ -24,17 +25,19 @@ public class ContainerHandheldFramingTable extends ContainerFramingTable {
         return tileFramingTable;
     }
 
+    /*
     @Override
     public void onContainerClosed(@NotNull EntityPlayer player) {
         super.onContainerClosed(player);
 
-        if (!this.world.isRemote) {
+        if (!world.isRemote) {
             this.clearContainer(player, this.world, tableInventory);
         }
     }
+     */
 
     @Override
     public boolean canInteractWith(@NotNull EntityPlayer player) {
-        return true;
+        return !world.isRemote;
     }
 }

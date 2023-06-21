@@ -51,8 +51,8 @@ public class ContainerFramingTable extends Container
     private final List<Slot> playerSlots;
     private final List<Slot> hotbarSlots;
 
-    public ContainerFramingTable (InventoryPlayer inventory, TileEntityFramingTable tileEntity) {
-        tableInventory = new InventoryContainerProxy(tileEntity, this);
+    public ContainerFramingTable (InventoryPlayer inventory, IInventory iInventory) {
+        tableInventory = new InventoryContainerProxy(iInventory, this);
 
         inputSlot = addSlotToContainer(new SlotRestricted(tableInventory, inputSlotIndex, InputX, InputY));
 

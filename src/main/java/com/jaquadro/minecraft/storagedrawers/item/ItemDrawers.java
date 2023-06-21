@@ -12,14 +12,19 @@ import com.jaquadro.minecraft.storagedrawers.core.ModBlocks;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -84,8 +89,25 @@ public class ItemDrawers extends ItemBlock
 
         list.add(I18n.format("storagedrawers.drawers.description", getCapacityForBlock(itemStack)));
 
-        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("tile"))
+        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("tile")) {
             list.add(ChatFormatting.YELLOW + I18n.format("storagedrawers.drawers.sealed"));
+
+            NBTTagCompound tileCompound = itemStack.getTagCompound().getCompoundTag("tile");
+
+            if (!GuiScreen.isShiftKeyDown() || !tileCompound.hasKey("Drawers"))
+                return;
+
+            NBTTagList drawerList = tileCompound.getTagList("Drawers", Constants.NBT.TAG_COMPOUND);
+
+            for (NBTBase drawerBase : drawerList) {
+                StorageDrawers.log.info(drawerBase);
+                if (!(drawerBase instanceof NBTTagCompound drawerTag) || !drawerTag.hasKey("Item") || !drawerTag.hasKey("Count")) {
+                    continue;
+                }
+                ItemStack drawerStack = new ItemStack(drawerTag.getCompoundTag("Item"));
+                list.add(drawerStack.getDisplayName() + " x" + drawerTag.getTag("Count"));
+            }
+        }
     }
 
     private int getCapacityForBlock (@Nonnull ItemStack itemStack) {
@@ -109,4 +131,6 @@ public class ItemDrawers extends ItemBlock
 
         return 0;
     }
+
+
 }
