@@ -3,11 +3,13 @@ package com.jaquadro.minecraft.storagedrawers.client.renderer;
 import com.jaquadro.minecraft.storagedrawers.api.storage.attribute.IFrameable;
 import com.jaquadro.minecraft.storagedrawers.block.BlockFramingTable;
 import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityFramingTable;
+import com.jaquadro.minecraft.storagedrawers.inventory.ContainerFramingTable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,10 +32,11 @@ public class TileEntityFramingRenderer extends TileEntitySpecialRenderer<TileEnt
             return;
 
         // Get each slot's contents
-        ItemStack input = tile.getStackInSlot(0);
-        ItemStack matSide = tile.getStackInSlot(1);
-        ItemStack matTrim = tile.getStackInSlot(2);
-        ItemStack matFront = tile.getStackInSlot(3);
+        IInventory inventory = tile.getIInventory();
+        ItemStack input = inventory.getStackInSlot(ContainerFramingTable.inputSlotIndex);
+        ItemStack matSide = inventory.getStackInSlot(ContainerFramingTable.matSideSlotIndex);
+        ItemStack matTrim = inventory.getStackInSlot(ContainerFramingTable.matTrimSlotIndex);
+        ItemStack matFront = inventory.getStackInSlot(ContainerFramingTable.matFrontSlotIndex);
 
         if (!input.isEmpty() && input.getItem() instanceof IFrameable && !matSide.isEmpty()) {
             ItemStack result = ((IFrameable) input.getItem()).decorate(input, matSide, matTrim, matFront);
